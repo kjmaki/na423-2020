@@ -96,12 +96,7 @@ functions
         fields          (".*");
     }
 
-    yPlus
-    {
-        type            yPlus;
-        libs            ("libfieldFunctionObjects.so");
-        writeControl    writeTime;
-    }
+  
 
 }
 
