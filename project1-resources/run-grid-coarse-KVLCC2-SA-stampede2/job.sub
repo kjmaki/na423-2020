@@ -1,0 +1,24 @@
+#!/bin/bash
+#SBATCH -A TG-ECS190011       # project ID
+#SBATCH -J testJob            # job name
+#SBATCH -o log.o%j            # output and error file name (%j expands to jobID)
+#SBATCH -e error.o%j          # output and error file name (%j expands to jobID)
+#SBATCH -n 6                  # total number of mpi tasks requested
+#SBATCH -N 1                  # total number of nodes
+#SBATCH -p development      # queue (partition) -- normal, development, etc.
+# #SBATCH -p normal             # queue (partition) -- normal, development, etc.
+#SBATCH -t 00:15:00           # run time (hh:mm:ss) 
+#SBATCH --mail-type=ALL       # setup email alert
+#SBATCH --mail-user=kjmaki@umich.edu
+
+./Allrun
+
+#decomposePar > log.decomp
+#checkMesh > log.checkMesh
+#Co -latestTime > log.Co
+#ibrun -np 6 snappyHexMesh -parallel -overwrite > log.shm
+#ibrun -np 96 topoSet -parallel > log.topoSet
+#ibrun -np 96 ibFoam-v2 -parallel > log.run2
+#ibrun -np 640 simpleFoam -parallel > log.simpleFoam
+#ibrun -np 640 pimpleFoam -parallel > log.pimpleFoam
+#reconstructPar -latestTime > log.recon

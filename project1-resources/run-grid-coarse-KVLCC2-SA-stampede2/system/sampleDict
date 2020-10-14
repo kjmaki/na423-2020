@@ -1,0 +1,73 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.4.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      sampleDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+surfaceFormat vtk;
+setFormat raw;
+interpolationScheme cellPoint;
+
+// Fields to sample.
+fields
+(
+    p
+    U
+);
+
+sets
+(
+    uvw_prop
+    {
+        type        uniform;
+        axis        distance;
+
+        //- cavity. Slightly perturbed so not to align with face or edge.
+        start       (2.7103245 0.0 -0.14);
+        end         (2.7103245 0.5 -0.14);
+        nPoints     1000;
+    }
+);
+
+surfaces
+(
+    body
+    {
+        type            patch;
+        patches         ( "hull.*" );
+        triangulate     false;
+    }
+    
+    x09825 
+    {
+        type            plane;    // always triangulated
+        basePoint       (2.7103245 0 0);
+        normalVector    (1 0 0);
+        //triangulate     false; //do not triangulate
+    }
+    x085
+    {
+        type            plane;    // always triangulated
+        basePoint       (2.34 0 0);
+        normalVector    (1 0 0);
+        //triangulate     false; //do not triangulate
+    }
+    x11 
+    {
+        type            plane;    // always triangulated
+        basePoint       (3.03448 0 0);
+        normalVector    (1 0 0);
+        //triangulate     false; //do not triangulate
+    }
+
+);
+// *********************************************************************** //

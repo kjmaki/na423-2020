@@ -1,0 +1,34 @@
+set term x11 0
+set yr[0:0.006] #set y-axis range
+set grid
+set xlabel 'iter'
+set ylabel 'CT'
+
+U = 25        #flow speed
+S = 2.02096   #wetted surface area
+rho = 1       #fluid density
+
+#this is the tow-tank experimental CT
+plot 0.00411 w l lt 1 lc 0 lw 3 t 'Kim2001'
+#next plot the numerical result from the forces functionObject
+#we're plotting column 1 versus the sum of columns 2 (pressure drag in x-dir) and 5 (viscous drag in x-dir) in the forces.dat file
+replot "<sed 's/(/ /g' postProcessing/forces/0/forces.dat" u 1:($2+$5)*2/(0.5*rho*U**2*S) w l lt 1 lc 3 lw 3 t 'CFD' 
+
+set term post enhanced color eps
+set out "KVLCC2-CT.eps"
+rep
+
+set term x11 1
+set yr[0:0.006]
+set grid
+set xlabel 'iter'
+set ylabel 'CF'
+
+#this is the CF from ITTC57 formula
+plot 0.00345 w l lt 1 lc 0 lw 3 t 'ITTC57'
+#this is just the viscous drag in the x-dir (column 5 of forces.dat) normalized
+replot "<sed 's/(/ /g' postProcessing/forces/0/forces.dat" u 1:($5)*2/(0.5*rho*U**2*S) w l lt 1 lc 3 lw 3 t 'CFD'
+
+set term post enhanced color eps
+set out "KVLCC2-CF.eps"
+rep
