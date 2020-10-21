@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\ 
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.4.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     simpleFoam;
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         3000;
+deltaT          1;
+writeControl    timeStep;
+writeInterval   500;
+purgeWrite      0;
+writeFormat     ascii;
+writePrecision  8;
+writeCompression no;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable true;
+
+functions
+{ 
+
+    #include "streamLines"
+    #include "wallBoundedStreamLines"
+    #include "cuttingPlane"
+
+    forces
+    { 
+        type                forces;
+        libs                ("libforces.so");
+        writeControl        timeStep;
+        writeInterval       1;
+        patches             (hull);
+        pName               p;
+        UName               U;
+        rho                 rhoInf;
+        rhoInf              1.0;
+        log                 true;
+        liftDir             (0.000000 0.000000 1.000000);
+        dragDir             (1.000000 0.000000 0.000000);
+        CofR                (0.000000 0.000000 0.000000);
+        pitchAxis           (0 1 0);
+    } 
+
+    yPlus
+    {
+        type            yPlus;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    writeTime;
+        patches         (hull);
+    }
+
+    residuals
+    {
+        type            solverInfo;
+        libs            ("libutilityFunctionObjects.so");
+        fields          (".*");
+    }
+
+
+} 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
