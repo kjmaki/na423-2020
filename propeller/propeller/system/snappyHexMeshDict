@@ -160,7 +160,7 @@ castellatedMeshControls
     {
         innerCylinderSmall
         {
-            level       (5 5);
+            level       (4 4);
 
             faceType    boundary;
             cellZone    innerCylinderSmall;
@@ -173,11 +173,11 @@ castellatedMeshControls
         }
         prop
         {
-            level       (5 6);
+            level       (4 6);
         }
         propShaft
         {
-            level       (5 5);
+            level       (4 4);
         }
     }
 
@@ -208,7 +208,7 @@ castellatedMeshControls
         innerCylinderSmall
         {
             mode        inside;
-            levels      ((1E15 5));
+            levels      ((1E15 4));
         }
     }
 
