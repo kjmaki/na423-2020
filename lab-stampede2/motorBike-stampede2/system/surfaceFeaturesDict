@@ -10,19 +10,22 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      turbulenceProperties;
+    object      surfaceFeaturesDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-simulationType RAS;
+surfaces ("motorBike.obj");
 
-RAS
+// Identify a feature when angle between faces < includedAngle
+includedAngle       150;
+
+subsetFeatures
 {
-    RASModel            kOmegaSST;
+    // Keep nonManifold edges (edges with >2 connected faces)
+    nonManifoldEdges       no;
 
-    turbulence          on;
-
-    printCoeffs         on;
+    // Keep open edges (edges with 1 connected face)
+    openEdges       yes;
 }
 
 // ************************************************************************* //

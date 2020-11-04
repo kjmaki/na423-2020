@@ -1,9 +1,9 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  5                                     |
-|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
-|    \\/     M anipulation  |                                                 |
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
@@ -296,14 +296,6 @@ addLayersControls
 meshQualityControls
 {
     #include "meshQualityDict"
-
-
-    // Advanced
-
-    //- Number of error distribution iterations
-    nSmoothScale 4;
-    //- Amount to scale back displacement at error points
-    errorReduction 0.75;
 }
 
 
@@ -312,11 +304,9 @@ meshQualityControls
 // Write flags
 writeFlags
 (
-/*
     scalarLevels
     layerSets
     layerFields     // write volScalarField for layer coverage
-*/
 );
 
 
