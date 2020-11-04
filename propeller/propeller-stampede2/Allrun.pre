@@ -26,6 +26,8 @@ runApplication createPatch -overwrite
 #runApplication moveDynamicMesh -checkAMI
 
 # - set the initial fields
-restore0Dir
+# not available in OF7
+# restore0Dir
+cp 0.orig 0 -r
 
 #------------------------------------------------------------------------------
