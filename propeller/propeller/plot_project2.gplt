@@ -1,0 +1,28 @@
+set term x11 0
+set yr[0:1] #may change
+set grid
+set xlabel 'time'
+##set
+
+n2 = 18.331**2 ## rotation^2 RPS IF omega = 115.19 IF YOU CHANGED OMEGA YOU HAVE TO CHANGE THIS AND THE VALUE BELOW
+n = 18.331 ## use fo n_0
+d4 = 0.128**4 ##m^4
+##rho = 998 ## Possibly not needed
+d5 = 0.128**5 ##m^5 ## used for K_Q
+
+V_a = 1.643 ## used for nu_0 CHANGE FOR DIFFERENT CASES
+
+## KT
+pl "<sed 's/(/ /g' postProcessing/forces/0/forces.dat" u 1:($2)*-1/(n2*d4) t'K_T' w l
+
+
+
+##Kq where column 13 is moment in the z-direction for torque
+replot "<sed 's/(/ /g' postProcessing/forces/0/forces.dat" u 1:($13)*-1/(n2*d5) t'K_Q' w l
+
+##Open water efficeny
+##replot "<sed 's/(/ /g' postProcessing/forces/0/forces.dat" u 1:($2)*(V_a/(2*3.14*n*($13))) t'nu_0' w l
+
+##set term post enhanced color eps
+##set out "open_water_diagram.eps"
+##rep
