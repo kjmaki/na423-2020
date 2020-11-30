@@ -1,0 +1,8 @@
+Usage
+
+awk -f foamLog.awk log.interFoam 
+
+The last parameter is the name of the log file. 
+It will create a folder called "logs", the time histories of "centre of rotation" and the off diagonal coefficient in the orientation matrix are written in logs/COR_X and logs/Orientation_X, where "X" is number of PIMPLE iteration in each time step.
+
+There is no restriction on how many PIMPLE loops you use. The data corresponds to PIMPLE iteration X will be written into COR_X and Orientation_X, accordingly. 
