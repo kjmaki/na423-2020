@@ -1,0 +1,15 @@
+set term x11 0
+set yr[0:100] #set y-axis range
+set border 31 lw 0.3
+set size 0.6, 0.6
+set grid
+set xlabel 'time (s)'
+set ylabel 'Drag (N)'
+
+#plot the numerical result from the forces functionObject
+#we're plotting column 1 versus column 2, note the factor of 2 due to half hull
+plot "<sed 's/(/ /g' postProcessing/forces/0/force.dat" u 1:($2)*-2 w l lt 1 lc 3 lw 3 t 'CFD' 
+
+set term post enhanced color eps font "Times, 14"
+set out "drag.eps"
+rep
