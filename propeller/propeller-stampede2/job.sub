@@ -9,7 +9,7 @@
 # #SBATCH -p normal             # queue (partition) -- normal, development, etc.
 #SBATCH -t 00:15:00           # run time (hh:mm:ss) 
 #SBATCH --mail-type=ALL       # setup email alert
-#SBATCH --mail-user=hxye@umich.edu
+#SBATCH --mail-user=changeme@umich.edu
 
 source /home1/apps/intel18/impi18_0/OpenFOAM/OpenFOAM-7/etc/bashrc
 
